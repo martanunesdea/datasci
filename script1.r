@@ -45,8 +45,9 @@ avg_month9 <- get_month_temp_average("9", "Temp")
 # anyway, let´s visualise months differently..
 ggplot(airquality) +
   geom_point(mapping = aes(x=Day, y=Temp)) + 
-  facet_wrap(~ Month, nrow = 2)
+  facet_wrap( ~ Month, ncol = 2)
 
-
-
+ggplot(airquality) +
+  geom_smooth(mapping = aes(x=Day, y=Temp)) + 
+  facet_wrap( ~ Month, ncol = 2)
 
