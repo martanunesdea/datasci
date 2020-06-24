@@ -1,3 +1,4 @@
+library(ggplot2)
 # Chapter 1
 data(mpg)
 # A simple plot
@@ -165,6 +166,5 @@ bar <- ggplot(data = diamonds) +
 bar
 bar + coord_flip()
 bar + coord_polar()
-
 
 
