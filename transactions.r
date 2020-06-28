@@ -3,13 +3,6 @@ library(tidyr)
 library(magrittr)
 library(ggplot2)
 
-#### Functions #####
-filter_month <- function(month_number)
-{
-  df2 <- filter(df, month == month_number)
-  return(df2)
-}
-
 #### Import data and tidy up#####
 data <- read_csv("data.csv")
 df <- select(data, "Transaction Date", "Debit Amount", "Credit Amount", "Transaction Description") %>%
@@ -19,28 +12,31 @@ df[is.na(df)] <- 0
 
 # Expenditure in each month
 df$month <- as.numeric(df$month)
-ggplot(df) +
+ggplot(data = df) +
   geom_point(mapping = aes(x = day, y = out, color = month))
 
-# Separate months into separate data frames 
-months <- c("january", "february", "march", "april", "may", "june", "july", "august", 
-            "september", "october", "november", "december")
-months_number <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
 
-for(i in 1:6){
-  assign(months[i], filter_month(months_number[i]) )
-}
+df <- mutate(df, 
+             added_up = -out+incoming) 
 
-# Expenditure across months
+invested <- filter(df, desc=="AJ BELL" | desc=="M NUNES DE ABREU") %>%
+  group_by(month) %>%
+  summarise(
+    invested = sum(out)
+  )
+
 by_month <- group_by(df, month) %>% 
   summarise( 
-    total_out = sum(out),
-    total_in = sum(incoming))
-
-
+    total_out = sum(added_up),
+    total_in = sum(incoming)) %>%
+  full_join(invested)
+  
 ggplot(data = by_month) +
-  geom_bar(mapping = aes(x = month, y = total_out), stat = "identity") +
+  geom_line(mapping = aes(x = month, y = total_out), color = "red") +
+  geom_line(mapping = aes(x = month, y = invested), color = "blue") +
   ggtitle("Expenditure across months") +
   xlab("Months") +
   ylab("Expenses")
+
+
 
