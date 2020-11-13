@@ -14,21 +14,23 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, size = class))
 # Transparency
 ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+  geom_point(mapping = aes(x = cty, y = hwy, alpha = class))
 # Shape - note six shapes maximum, the other classes will go unplotted
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+
+#names(mpg) <- c("col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8", "col9", "col10", "col11")
 
 ## Facets #################
 # Adding facet grids 
 # several graphs in one
 ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy)) + 
-  facet_wrap(~ class, nrow = 2)
+  geom_point(mapping = aes(x = col3, y = col8)) + 
+  facet_wrap(~ col2, nrow = 3)
 
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) + 
-  facet_grid(drv ~ cyl)
+  facet_grid(col4 ~ col10)
 
 # comes from this:
 ggplot(data = mpg) + 
@@ -96,12 +98,11 @@ ggplot(data = diamonds) +
 # although, sometimes it is necessary to bypass the default stat from geom_bar
 # e.g. if you want more info. 
 ggplot(data = diamonds) + 
-  stat_summary(
-    mapping = aes(x = cut, y = depth),
+  stat_summary( mapping = aes(x = cut, y = depth),
     fun.ymin = min,
     fun.ymax = max,
     fun.y = median
-  )
+)
 
 
 
@@ -113,7 +114,8 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut, fill = cut))
 # map the fill variable to a second variable: get them stacked
 ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = clarity))
+  geom_bar(mapping = aes(x = cut, fill = clar))
+
 # when using fill, add position as dodge for elements to be beside one another
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")

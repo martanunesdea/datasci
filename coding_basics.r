@@ -8,8 +8,11 @@ a <- sin(pi - 2)
 x <- 3*4
 ( y <- sqrt(356))
 
+double_x <- x*x
+
+
 # logical comparisons and bools
-bool1 <- sqrt(2) ^2 == 2
+my_Var1 <- sqrt(2) ^2 == 2
 bool2 <- 1 / 40 * 49 < 100
 bool3 <- near(sqrt(2) ^ 2, 2)
 
@@ -57,10 +60,10 @@ cume_dist(y)
 
 ## function calls ####
 # fun_name(arg_1, arg_2)
-seq(1,10)
+seq(1, 10)
 
 ## question 
-ret <- 1:3 + 1:10
+ret <- (1:3) + (1:10)
 
 
 # Measures of location
@@ -89,7 +92,6 @@ nth(x, 4)
 ##### Section 3 - dplyr ######
 library(nycflights13)
 install.packages("nycflights13")
-
 # group_by()
 # filter() 
 # arrange() - lets you reorder rows
@@ -98,7 +100,8 @@ install.packages("nycflights13")
 # summarise() - collapse several values into a single summary
 
 ## using filter() ####
-jan1 <- filter(flights, month == 1, day == 1)
+my_flights <- flights
+jan1 <- filter(flights, month == 1)
 summer <- filter(flights, month > 5 & month < 10)
 
 # explicit variables if using very long expressions inside functions
