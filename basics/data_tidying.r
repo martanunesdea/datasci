@@ -34,7 +34,6 @@ ggplot(airquality) +
 avg_month7 <- mean(as.matrix(select(filter(airquality, Month == "7"), Temp)))
 # ... we could turn this into a function if we think we´ll be doing this with all the months
 
-
 get_month_temp_average <- function(x, magnitude){
   res <- mean(as.matrix(select(filter(airquality, Month == x), magnitude)))
 }
@@ -54,13 +53,3 @@ ggplot(airquality) +
 ggplot(airquality) +
   geom_smooth(mapping = aes(x=Day, y=Temp, linetype=Month, color=Month)) +
   geom_point(mapping=aes(x=Day, y=Temp, color=Month))
-
-
-
-## part 2 
-data(EuStockMarkets)
-data(AirPassengers)
-data(esoph)
-
-
-esoph_cancer <- filter(esoph, ncases > 1)

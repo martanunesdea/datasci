@@ -1,3 +1,4 @@
+### PLOTTING DEMO #########################################################
 library(ggplot2)
 # Chapter 1
 data(mpg)

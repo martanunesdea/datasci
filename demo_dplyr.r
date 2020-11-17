@@ -1,97 +1,6 @@
-### Section 2 - Coding maths
-# simple arithmetics (output displayed on console)
-1 / 200 * 30
-(59 + 73 + 2) / 3
-# create new objects with format:
-# object_name <- value
-a <- sin(pi - 2)
-x <- 3*4
-( y <- sqrt(356))
-
-double_x <- x*x
-
-
-# logical comparisons and bools
-my_Var1 <- sqrt(2) ^2 == 2
-bool2 <- 1 / 40 * 49 < 100
-bool3 <- near(sqrt(2) ^ 2, 2)
-
-# logical operators ( | is OR, & is AND, ! is not)
-
-## arithmetic operators ####
-# +, -, *, /, ^ are vectorised
-# ie. if using a shorter parameter, it will be extended to match
-# useful in cojunction with aggregate functions
-# x / sum(x) gives proportion
-# y - mean(x) gives difference from the mean
-
-## modular arithmetic ####
-# useful - breaks integer up into pieces 
-# %/% integer division 
-# %% remainder
-
-## logs
-log2(4)  # a difference of 1 corresponds to doubling the original scale
-log(4)
-log10(4)
-
-## offsets ####
-# lead() and lag() 
-x <- 1:20
-x_prime <- lag(x)
-x_prime2 <- lead(x, 3)
-
-## cumulative and rolling aggregates ####
-x_sum <- cumsum(x)
-x_prod <- cumprod(x)
-x_min <- cummin(x)
-x_max <- cummax(x)
-x_cum_mean <- cummean(x)
-# RcppRoll package gives functions for rolling windows
-
-## ranking ####
-y <- c(1, 2, 2, NA, 3, 4)
-min_rank(y)
-min_rank(desc(y))
-row_number(y)
-dense_rank(y)
-percent_rank(y)
-cume_dist(y)
-
-## function calls ####
-# fun_name(arg_1, arg_2)
-seq(1, 10)
-
-## question 
-ret <- (1:3) + (1:10)
-
-
-# Measures of location
-x <- rnorm(100, 0, 1)
-mean(x)
-median(x)
-# of spread
-sd(x)     # standard measure of spread
-IQR(x)    # interquartile range
-mad(x)    # median absolute deviation (for outliers)
-# of rank
-min(x)
-quantile(x, 0.25) # generalisation of the median
-max(x)
-# of position
-first(x)
-last(x)
-nth(x, 4)
-
-
-## intercept - coding style #### 
-# use of spaces
-# naming conventions: camel case, underscores, prefixes
-
-
-##### Section 3 - dplyr ######
-library(nycflights13)
+##### DPLYR DEMO ##############################################################
 install.packages("nycflights13")
+library(nycflights13)
 # group_by()
 # filter() 
 # arrange() - lets you reorder rows
@@ -101,7 +10,8 @@ install.packages("nycflights13")
 
 ## using filter() ####
 my_flights <- flights
-jan1 <- filter(flights, month == 1)
+filter(flights)
+jan1 <- filter(flights, flights$month == 1)
 summer <- filter(flights, month > 5 & month < 10)
 
 # explicit variables if using very long expressions inside functions
@@ -137,10 +47,10 @@ flights2 <- select(flights,
                    air_time)
 
 flights2 <- mutate(flights2, 
-       gain = dep_delay - arr_delay,
-       speed = distance / air_time * 60,
-       hours = air_time * 60,
-       gain_per_hour = gain / hours )
+                   gain = dep_delay - arr_delay,
+                   speed = distance / air_time * 60,
+                   hours = air_time * 60,
+                   gain_per_hour = gain / hours )
 
 # to keep the new variables created only, transmute()
 flights2_processed <- transmute(flights,
@@ -150,9 +60,9 @@ flights2_processed <- transmute(flights,
 
 # can use modular arithmetic here:
 flights3_processed <- transmute(flights,
-          dep_time,
-          hour = dep_time %/% 100,
-          minute = dep_time %% 100
+                                dep_time,
+                                hour = dep_time %/% 100,
+                                minute = dep_time %% 100
 ) 
 
 ## using summarise() ####
@@ -165,7 +75,7 @@ delay <- summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
 
 
 
-## intercept - the pipeline operator ####
+## intercept - the pipeline operator #######
 delays <- flights %>% 
   group_by(dest) %>% 
   summarise(
@@ -189,7 +99,7 @@ delays <- not_cancelled %>%
   group_by(tailnum) %>% 
   summarise(
     delay = mean(arr_delay)
-)
+  )
 
 ggplot(data = delays, mapping = aes(x = delay)) + 
   geom_freqpoly(binwidth = 10)
