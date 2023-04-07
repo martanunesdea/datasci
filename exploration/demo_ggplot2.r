@@ -6,6 +6,10 @@ data(mpg)
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy))
 
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = displ < 5))
+
+
 ## Aesthetic mappings ##################
 # A simple plot with color as a distinguishing factor
 ggplot(data = mpg) + 
@@ -19,6 +23,17 @@ ggplot(data = mpg) +
 # Shape - note six shapes maximum, the other classes will go unplotted
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)
+
+# exercises
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(mapping = aes(group=drv), color = "blue", se = FALSE)
+
+
 
 #names(mpg) <- c("col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8", "col9", "col10", "col11")
 
@@ -106,7 +121,7 @@ ggplot(data = diamonds) +
 )
 
 
-
+data(diamonds)
 ## Positional adjustments ##
 # can colour with fill or colour
 ggplot(data = diamonds) + 
@@ -115,7 +130,7 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut, fill = cut))
 # map the fill variable to a second variable: get them stacked
 ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = clar))
+  geom_bar(mapping = aes(x = cut, fill = clarity))
 
 # when using fill, add position as dodge for elements to be beside one another
 ggplot(data = diamonds) + 
@@ -134,6 +149,8 @@ ggplot(data = diamonds, mapping = aes(x = cut, colour = clarity)) +
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy), position = "jitter")
 
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_count()
 
 ## Coordinate systems ###
 ggplot(data = mpg, mapping = aes(x = class, y = hwy)) + 

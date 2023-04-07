@@ -15,7 +15,6 @@ n2
 typeof(n2)
 
 ## Character #########
-
 c1 <- "c"
 c1
 typeof(c1)
@@ -25,7 +24,6 @@ c2
 typeof(c2)
 
 ## Logical #########
-
 l1 <- TRUE
 l1
 typeof(l1)

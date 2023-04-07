@@ -4,7 +4,6 @@
 install.packages("https://cran.r-project.org/src/contrib/nycflights13_1.0.1.tar.gz", repos=NULL, method="libcurl")
 library(nycflights13)
 library(dplyr)
-library(dplyr)
 library(ggplot2)
 flights
 

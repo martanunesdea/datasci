@@ -4,9 +4,9 @@ library(readr)
 # or just download: library(tidyverse) which include all of the above
 library(datasets)
 # setting our working directory
-setwd("/Users/martanunesdeabreu/r_dataviz")
+setwd("/Users/martanunesdeabreu/r_datasci/basics")
 # load dataset to rstudio
-my_data <- read_csv("set1.csv")
+# my_data <- read_csv("set1.csv")
 
 data(sleep)
 data(discoveries)
