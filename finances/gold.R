@@ -1,4 +1,3 @@
-
 # Data sources:
 # Gold prices: https://www.kaggle.com/datasets/arslanr369/daily-gold-price-2018-2023?resource=download
 # Brent Oil Prices: https://www.kaggle.com/datasets/mabusalah/brent-oil-prices
